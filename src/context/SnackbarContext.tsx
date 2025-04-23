@@ -5,11 +5,11 @@ type SnackbarType = {
   id: number
   title: string
   type: string
-};
+}
 
 type SnackbarContextType = {
   setSnackbar: (snackbar: SnackbarType) => void
-};
+}
 
 let globalSetSnackbar: (snackbar: Omit<SnackbarType, "id">) => void
 
@@ -30,14 +30,14 @@ export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
     setSnackbars((prevSnacks) => {
       const updatedSnackbars = [...prevSnacks, snackWithId];
       return updatedSnackbars.length > 3 ? updatedSnackbars.slice(1) : updatedSnackbars
-    });
+    })
 
     const timeout = setTimeout(() => {
       setSnackbars((prevSnacks) => prevSnacks.filter((snack) => snack.id != id))
-    }, 5000);
+    }, 5000)
 
     return () => clearTimeout(timeout)
-  };
+  }
 
   globalSetSnackbar = setSnackbar
 
